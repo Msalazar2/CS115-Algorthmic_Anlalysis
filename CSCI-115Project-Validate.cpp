@@ -1,10 +1,10 @@
 #include <iostream>
 using namespace std;
 
-bool validationCheck (int Array[], int n){
+bool validationCheck (int arr[], int n){
 
     for(int i = 0; i < n - 1; i++){
-        if(Array[i] > Array[i + 1]){
+        if(arr[i] > arr[i + 1]){
             return false;
         }
     }
@@ -12,10 +12,10 @@ bool validationCheck (int Array[], int n){
 }
 
 int main(){
-    int Array[] = {1, 2, 3, 4, 5};
-    int n = sizeof(Array) / sizeof(Array[0]);
+    int arr[] = {1, 2, 3, 4, 5};
+    int n = sizeof(arr) / sizeof(arr[0]);
 
-    if(validationCheck(Array, n)){
+    if(validationCheck(arr, n)){
         cout << "Array is sorted correctly\n";
     }
     else {
