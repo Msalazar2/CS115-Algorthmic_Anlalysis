@@ -1,3 +1,9 @@
+#include <iostream>
+#include <ctime>
+#include <cstdlib>
+#include <utility>
+using namespace std;
+
 int main(){
 
     srand(time(0));
