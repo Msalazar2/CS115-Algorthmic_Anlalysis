@@ -1,10 +1,9 @@
-# CS115-Algorthmic_Anlalysis
 <h1>Algorithmic Analysis</h1>
 
 <p>project description...</p>
 
 <h2>Team Members</h2>
-<p>...</p>
+<p>Marcelino Salazar, Oscar Mendez, Jose Angel Gomez-Bravo, Juvraj Singh Shergill</p>
 
 <h2>Experiment Overview</h2>
 <p>...</p>
