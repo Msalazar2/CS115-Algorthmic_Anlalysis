@@ -5,7 +5,7 @@
 #include <chrono>
 #include "Algorithms.h"
 #include "Number-Generator.h"
-#include "CSCI-115Project-Validate.cpp"
+#include "Validate.h"
 
 using namespace std;
 
@@ -415,6 +415,9 @@ int main(){
 
         case 2: {
 
+            int* originalArr = new int[n]; // One fixed reversed array used for every algorithm.
+            reversedSort(n, originalArr);
+
             cout << "Selection Sort: " << endl;
 
             // commented out average time and replaced with median time
@@ -428,7 +431,7 @@ int main(){
             
             int* arr = new int[n];
             
-            reversedSort(n, arr);
+            copyArray(originalArr, arr, n);
             
             auto start = chrono::high_resolution_clock::now();
             SelectionSort(arr, n);
@@ -471,7 +474,7 @@ int main(){
             
             int* arr = new int[n];
             
-            reversedSort(n, arr);
+            copyArray(originalArr, arr, n);
             
             auto start = chrono::high_resolution_clock::now();
             InsertionSort(arr, n);
@@ -514,7 +517,7 @@ int main(){
             
             int* arr = new int[n];
             
-            reversedSort(n, arr);
+            copyArray(originalArr, arr, n);
             
             auto start = chrono::high_resolution_clock::now();
             BubbleSort(arr, n);
@@ -557,7 +560,7 @@ int main(){
             
             int* arr = new int[n];
             
-            reversedSort(n, arr);
+            copyArray(originalArr, arr, n);
             
             auto start = chrono::high_resolution_clock::now();
             QuickSortMain(arr, n);
@@ -600,7 +603,7 @@ int main(){
             
             int* arr = new int[n];
             
-            reversedSort(n, arr);
+            copyArray(originalArr, arr, n);
             
             auto start = chrono::high_resolution_clock::now();
             MergeSortMain(arr, n);
@@ -643,7 +646,7 @@ int main(){
             
             int* arr = new int[n];
             
-            reversedSort(n, arr);
+            copyArray(originalArr, arr, n);
             
             auto start = chrono::high_resolution_clock::now();
             HeapSort(arr, n);
@@ -686,7 +689,7 @@ int main(){
             
             int* arr = new int[n];
             
-            reversedSort(n, arr);
+            copyArray(originalArr, arr, n);
             
             auto start = chrono::high_resolution_clock::now();
             CountingSort(arr, n);
@@ -729,7 +732,7 @@ int main(){
             
             int* arr = new int[n];
             
-            reversedSort(n, arr);
+            copyArray(originalArr, arr, n);
             
             auto start = chrono::high_resolution_clock::now();
             RadixSort(arr, n);
@@ -756,6 +759,8 @@ int main(){
             // cout << "\nAverage time: " << totalTime7 / 10 << " seconds\n";
 
             cout << "\nMedian time: " << medianTime(runTimes7, 10) << " seconds\n";
+
+            delete[] originalArr;
 
             break;
         }
@@ -763,6 +768,9 @@ int main(){
 
         case 3: {
 
+            int* originalArr = new int[n]; // One fixed sorted array used for every algorithm.
+            sorted(n, originalArr);
+
             cout << "Selection Sort: " << endl;
 
             // commented out average time and replaced with median time
@@ -776,7 +784,7 @@ int main(){
             
             int* arr = new int[n];
             
-            sorted(n, arr);
+            copyArray(originalArr, arr, n);
             
             auto start = chrono::high_resolution_clock::now();
             SelectionSort(arr, n);
@@ -819,7 +827,7 @@ int main(){
             
             int* arr = new int[n];
             
-            sorted(n, arr);
+            copyArray(originalArr, arr, n);
             
             auto start = chrono::high_resolution_clock::now();
             InsertionSort(arr, n);
@@ -862,7 +870,7 @@ int main(){
             
             int* arr = new int[n];
             
-            sorted(n, arr);
+            copyArray(originalArr, arr, n);
             
             auto start = chrono::high_resolution_clock::now();
             BubbleSort(arr, n);
@@ -905,7 +913,7 @@ int main(){
             
             int* arr = new int[n];
             
-            sorted(n, arr);
+            copyArray(originalArr, arr, n);
             
             auto start = chrono::high_resolution_clock::now();
             QuickSortMain(arr, n);
@@ -948,7 +956,7 @@ int main(){
             
             int* arr = new int[n];
             
-            sorted(n, arr);
+            copyArray(originalArr, arr, n);
             
             auto start = chrono::high_resolution_clock::now();
             MergeSortMain(arr, n);
@@ -991,7 +999,7 @@ int main(){
             
             int* arr = new int[n];
             
-            sorted(n, arr);
+            copyArray(originalArr, arr, n);
             
             auto start = chrono::high_resolution_clock::now();
             HeapSort(arr, n);
@@ -1034,7 +1042,7 @@ int main(){
             
             int* arr = new int[n];
             
-            sorted(n, arr);
+            copyArray(originalArr, arr, n);
             
             auto start = chrono::high_resolution_clock::now();
             CountingSort(arr, n);
@@ -1077,7 +1085,7 @@ int main(){
             
             int* arr = new int[n];
             
-            sorted(n, arr);
+            copyArray(originalArr, arr, n);
             
             auto start = chrono::high_resolution_clock::now();
             RadixSort(arr, n);
@@ -1104,6 +1112,8 @@ int main(){
             // cout << "\nAverage time: " << totalTime7 / 10 << " seconds\n";
 
             cout << "\nMedian time: " << medianTime(runTimes7, 10) << " seconds\n";
+
+            delete[] originalArr;
 
             break;
         }
