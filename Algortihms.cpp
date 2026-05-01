@@ -309,7 +309,7 @@ bool validationCheck (int arr[], int n){
 /* Generates random numbers, using the input size*/
 void randomNumber(int n, int arr[]){
     for(int i = 0; i < n; i++){
-                arr[i] = rand() % 100;
+                arr[i] = rand() % n;
             }
 }
 
@@ -337,7 +337,7 @@ void halfSorted(int n, int arr[]){
         }
 
         for(int i = n / 2; i < n; i++){
-            arr[i] = rand() % 100;
+            arr[i] = rand() % n;
         }
 }
 
