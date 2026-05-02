@@ -1,3 +1,4 @@
+#include "Validate.h"
 #include <iostream>
 using namespace std;
 
@@ -23,19 +24,3 @@ void printArray(int arr[], int n) {
 
     cout << endl;
 }
-
-/*  commented out so Test.cpp can link
-with these functions without having two main functions
-int main(){
-    int arr[] = {1, 2, 3, 4, 5};
-    int n = sizeof(arr) / sizeof(arr[0]);
-
-    if(validationCheck(arr, n)){
-        cout << "Array is sorted correctly\n";
-    }
-    else {
-        cout << "Array is not sorted correctly\n";
-    }
-
-
-}*/

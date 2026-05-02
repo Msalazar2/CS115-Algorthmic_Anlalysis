@@ -1,0 +1,21 @@
+This sample input runs:
+
+1. Manual test
+2. n = 10
+3. Sorted input
+
+The program should display the testing menu first.
+
+Then it should run each sorting algorithm and show:
+
+- The algorithm name
+- The input type and n value
+- Time taken for each run
+- The median time
+- The comparison count for comparison-based sorts
+- Time divided by comparisons for comparison-based sorts
+
+Counting Sort and Radix Sort should say that comparisons are not used because
+they are not comparison-based sorts.
+
+Exact timing values depend on the computer running the program.

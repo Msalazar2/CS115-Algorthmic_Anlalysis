@@ -367,3 +367,239 @@ void RadixSort(int arr[], int n) {
     }
 
 }
+
+/* SelectionSortCount:
+   Sorts the same way as Selection Sort, but also counts each time
+   two array values are compared. */
+long long SelectionSortCount(int arr[], int n) {
+    long long comparisons = 0;
+
+    for(int i = 0; i < n - 1; i++) {
+        int min_Index = i;
+
+        for(int j = i + 1; j < n; j++) {
+            comparisons++; // Counts arr[j] < arr[min_Index].
+            if(arr[j] < arr[min_Index]) {
+                min_Index = j;
+            }
+        }
+
+        swap(arr[i], arr[min_Index]);
+    }
+
+    return comparisons;
+}
+
+/* InsertionSortCount:
+   Counts the times Insertion Sort compares an array value to the key.
+   The j >= 0 check is not counted because it only checks an index. */
+long long InsertionSortCount(int arr[], int n) {
+    long long comparisons = 0;
+
+    for(int i = 1; i < n; i++) {
+        int key = arr[i];
+        int j = i - 1;
+
+        while(j >= 0) {
+            comparisons++; // Counts arr[j] > key.
+            if(arr[j] > key) {
+                arr[j + 1] = arr[j];
+                j--;
+            }
+            else {
+                break;
+            }
+        }
+
+        arr[j + 1] = key;
+    }
+
+    return comparisons;
+}
+
+/* BubbleSortCount:
+   Counts each neighboring comparison made by Bubble Sort. */
+long long BubbleSortCount(int arr[], int n) {
+    long long comparisons = 0;
+    bool swapped;
+
+    for(int i = 0; i < n - 1; i++) {
+        swapped = false;
+
+        for(int j = 0; j < n - i - 1; j++) {
+            comparisons++; // Counts arr[j] > arr[j + 1].
+            if(arr[j] > arr[j + 1]) {
+                swap(arr[j], arr[j + 1]);
+                swapped = true;
+            }
+        }
+
+        if(!swapped) {
+            break;
+        }
+    }
+
+    return comparisons;
+}
+
+/* partitionCount:
+   Quick Sort helper that counts each comparison to the pivot. */
+int partitionCount(int arr[], int low, int high, long long& comparisons) {
+    int randomIndex = low + rand() % (high - low + 1);
+    swap(arr[randomIndex], arr[high]);
+
+    int pivot = arr[high];
+    int i = low - 1;
+
+    for(int j = low; j < high; j++) {
+        comparisons++; // Counts arr[j] <= pivot.
+        if(arr[j] <= pivot) {
+            i++;
+            swap(arr[i], arr[j]);
+        }
+    }
+
+    swap(arr[i + 1], arr[high]);
+    return i + 1;
+}
+
+/* quickSortCount:
+   Recursive Quick Sort helper that passes the comparison counter along. */
+void quickSortCount(int arr[], int low, int high, long long& comparisons) {
+    if(low < high) {
+        int pi = partitionCount(arr, low, high, comparisons);
+
+        quickSortCount(arr, low, pi - 1, comparisons);
+        quickSortCount(arr, pi + 1, high, comparisons);
+    }
+}
+
+/* QuickSortCountMain:
+   Wrapper that returns how many pivot comparisons Quick Sort made. */
+long long QuickSortCountMain(int arr[], int n) {
+    long long comparisons = 0;
+
+    if(n > 0) {
+        quickSortCount(arr, 0, n - 1, comparisons);
+    }
+
+    return comparisons;
+}
+
+/* MergeCount:
+   Merge Sort helper that counts comparisons between the left and right halves. */
+void MergeCount(int* numbers, int leftFirst, int leftLast, int rightLast,
+                long long& comparisons) {
+    int mergedSize = rightLast - leftFirst + 1;
+    int* mergedNumbers = new int[mergedSize];
+
+    int mergePos = 0;
+    int leftPos = leftFirst;
+    int rightPos = leftLast + 1;
+
+    while(leftPos <= leftLast && rightPos <= rightLast) {
+        comparisons++; // Counts numbers[leftPos] <= numbers[rightPos].
+        if(numbers[leftPos] <= numbers[rightPos]) {
+            mergedNumbers[mergePos] = numbers[leftPos];
+            leftPos++;
+        }
+        else {
+            mergedNumbers[mergePos] = numbers[rightPos];
+            rightPos++;
+        }
+        mergePos++;
+    }
+
+    while(leftPos <= leftLast) {
+        mergedNumbers[mergePos] = numbers[leftPos];
+        leftPos++;
+        mergePos++;
+    }
+
+    while(rightPos <= rightLast) {
+        mergedNumbers[mergePos] = numbers[rightPos];
+        rightPos++;
+        mergePos++;
+    }
+
+    for(mergePos = 0; mergePos < mergedSize; mergePos++) {
+        numbers[leftFirst + mergePos] = mergedNumbers[mergePos];
+    }
+
+    delete[] mergedNumbers;
+}
+
+/* MergeSortCount:
+   Recursive Merge Sort helper that keeps the same comparison counter. */
+void MergeSortCount(int* numbers, int leftFirst, int rightLast,
+                    long long& comparisons) {
+    if(leftFirst < rightLast) {
+        int mid = leftFirst + (rightLast - leftFirst) / 2;
+
+        MergeSortCount(numbers, leftFirst, mid, comparisons);
+        MergeSortCount(numbers, mid + 1, rightLast, comparisons);
+        MergeCount(numbers, leftFirst, mid, rightLast, comparisons);
+    }
+}
+
+/* MergeSortCountMain:
+   Wrapper that returns how many left-vs-right comparisons Merge Sort made. */
+long long MergeSortCountMain(int arr[], int n) {
+    long long comparisons = 0;
+
+    if(n > 0) {
+        MergeSortCount(arr, 0, n - 1, comparisons);
+    }
+
+    return comparisons;
+}
+
+/* maxHeapifyCount:
+   Heap Sort helper that counts comparisons between parent and child values. */
+void maxHeapifyCount(int arr[], int n, int i, long long& comparisons) {
+    int largest = i;
+    int left = 2 * i + 1;
+    int right = 2 * i + 2;
+
+    if(left < n) {
+        comparisons++; // Counts arr[left] > arr[largest].
+        if(arr[left] > arr[largest]) {
+            largest = left;
+        }
+    }
+
+    if(right < n) {
+        comparisons++; // Counts arr[right] > arr[largest].
+        if(arr[right] > arr[largest]) {
+            largest = right;
+        }
+    }
+
+    if(largest != i) {
+        swap(arr[i], arr[largest]);
+        maxHeapifyCount(arr, n, largest, comparisons);
+    }
+}
+
+/* buildMaxHeapCount:
+   Builds the heap and keeps adding to the same comparison count. */
+void buildMaxHeapCount(int arr[], int n, long long& comparisons) {
+    for(int i = n / 2 - 1; i >= 0; i--) {
+        maxHeapifyCount(arr, n, i, comparisons);
+    }
+}
+
+/* HeapSortCount:
+   Counts the value comparisons made while Heap Sort builds and fixes the heap. */
+long long HeapSortCount(int arr[], int n) {
+    long long comparisons = 0;
+
+    buildMaxHeapCount(arr, n, comparisons);
+
+    for(int i = n - 1; i > 0; i--) {
+        swap(arr[0], arr[i]);
+        maxHeapifyCount(arr, i, 0, comparisons);
+    }
+
+    return comparisons;
+}
