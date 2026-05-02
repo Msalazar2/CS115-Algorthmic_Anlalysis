@@ -13,7 +13,7 @@
 <pre>
 part1_sorting/
   src/        source code
-  tests/      test inputs, generators, and small validation tests
+  tests/      test inputs, generators, and experiment helper code
   data/       optional small data files
 </pre>
 
@@ -76,13 +76,6 @@ g++ -std=c++17 part1_sorting/src/Test.cpp part1_sorting/src/Algorithms.cpp part1
 </pre>
 
 <p>The file <code>tests/expected_output_summary.txt</code> explains what the sample run should show.</p>
-
-<p>Compile and run the small validation tests:</p>
-
-<pre>
-g++ -std=c++17 tests/small_validation_tests.cpp src/Algorithms.cpp src/Validate.cpp -o small_validation_tests
-./small_validation_tests
-</pre>
 
 <h2>How To Reproduce Graphs</h2>
 <p>...</p>
